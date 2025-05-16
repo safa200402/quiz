@@ -1,0 +1,3 @@
+1- Taruh file html yang ada script-nya di dalam satu directory dengan main.js
+2- Kemudian jalankan di CMD: node main.js
+3- Hasilnya abisa di cek di folder hasil
