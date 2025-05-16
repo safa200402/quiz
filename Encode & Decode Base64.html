@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encode & Decode Base64</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="mb-4">Encode & Decode Base64</h1>
+
+    <div class="mb-3">
+      <label for="inputText" class="form-label">Teks Asli</label>
+      <textarea class="form-control" id="inputText" rows="4" placeholder="Masukkan teks asli di sini..."></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="outputText" class="form-label">Hasil Encode/Decode</label>
+      <textarea class="form-control" id="outputText" rows="4" placeholder="Hasil akan tampil di sini..." readonly></textarea>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button id="btnEncode" class="btn btn-primary">Encode ke Base64</button>
+      <button id="btnDecode" class="btn btn-success">Decode dari Base64</button>
+      <button id="btnClear" class="btn btn-secondary ms-auto">Clear</button>
+    </div>
+  </div>
+
+  <script>
+    const inputText = document.getElementById('inputText');
+    const outputText = document.getElementById('outputText');
+    const btnEncode = document.getElementById('btnEncode');
+    const btnDecode = document.getElementById('btnDecode');
+    const btnClear = document.getElementById('btnClear');
+
+    btnEncode.addEventListener('click', () => {
+      try {
+        const encoded = btoa(inputText.value);
+        outputText.value = encoded;
+      } catch (e) {
+        outputText.value = 'Error: Teks mengandung karakter tidak bisa di-encode ke Base64.';
+      }
+    });
+
+    btnDecode.addEventListener('click', () => {
+      try {
+        const decoded = atob(inputText.value);
+        outputText.value = decoded;
+      } catch (e) {
+        outputText.value = 'Error: Input bukan Base64 yang valid.';
+      }
+    });
+
+    btnClear.addEventListener('click', () => {
+      inputText.value = '';
+      outputText.value = '';
+      inputText.focus();
+    });
+  </script>
+</body>
+</html>

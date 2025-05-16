@@ -13,7 +13,7 @@
             user-select: none;         /* Non-prefixed version, supported by Chrome, Opera, etc. */
         }
         body {margin: 0px;  overflow: hidden;}
-        .quiz-container { background: rgba(255, 255, 255, 0.95); padding: 20px 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 400px; color: #000; text-align: center; position: relative; }
+        .quiz-container { box-sizing: content-box; background: rgba(255, 255, 255, 0.95); padding: 20px 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 400px; color: #000; text-align: center; position: relative; }
         .question { font-family: 'Poppins', Amiri; font-size: 1.2rem; margin: 20px 15px 15px 15px; }
         .options, .short-answer { margin-bottom: 15px; }
         .short-answer button{ margin-top: 10px; background: #00BFFF; color: #fff; border: none; padding: 6px 7px; border-radius: 5px; cursor: pointer; }
@@ -31,7 +31,7 @@
 			height: max-content;
 			width: 81%; 
 			padding: 15px; 
-			bottom: 7%;			
+			/* bottom: 7%; */
 		} 
 
         #feedbackBtn {
@@ -58,9 +58,74 @@
             /* margin: 0px; */
             padding: 0px 2px;
         }
+
+        /* Untuk Firefox */
+        * {
+            scrollbar-width: none;  /* Hilangkan scrollbar */
+            -ms-overflow-style: none;  /* IE 10+ */
+        }
+
+        /* Untuk Chrome, Edge, Safari */
+        * ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #cek {
+            cursor: pointer;            
+        }
+
     </style>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+    <style>
+        #quizContainer_navigation { 
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: -webkit-fill-available;
+            height: -webkit-fill-available;
+            background: #ffdd9f;
+            padding: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            overflow: auto;
+            z-index: 99;
+
+        }
+        #pagination_navigation button { margin-right: 5px; padding: 5px 10px; background: #e0e0e0; border: none; cursor: pointer; }
+        #pagination_navigation button:hover { background: #007bff; color: #fff; }
+        #closeBtn_navigation { position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer; }
+
+        #openQuiz_navigation {
+            background: orange;
+            border: 0px black solid;
+            border-radius: 11px;
+            padding: 9px;
+            cursor: pointer;
+        }
+
+        #fullscreenButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            fill: #c0c0c0;
+            z-index: 9;
+
+        }
+
+        #fullscreenButton:hover {
+            transform: scale(1.1);
+            fill: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -69,7 +134,14 @@
 			<div id="description">
 				<h1>Quiz Interaktif</h1>
 				Jawablah setiap pertanyaan dengan benar.
+                
+
 			</div>
+            <br>
+            <label id="inputOpsiAcak">
+                <input type="checkbox" id="cek" />
+                Soal Acak
+            </label>
 			<button id="startBtn" onclick="startQuiz()">Mulai Quiz</button>
 			<div id="quizContent" style="display: none;">
                 <div>
@@ -86,11 +158,24 @@
 					<button onclick="submitShortAnswer()">Submit</button>
 				</div>
 				<div id="result"></div>
+                <button onclick='nextQuestion()' style="border: 0px black solid;background: #f49e00;width: 50%;justify-self: center;color: black;padding: 4px;border-radius: 11px;cursor: pointer;">Skip</button>
 				<button id="nextBtn" onclick="nextQuestion()">Lanjutkan</button>
 
 			</div>
 		</div>
+
+
+        <div id="quizContainer_navigation">
+            <span id="closeBtn_navigation">&times;</span>
+            <div id="questionContainer_navigation"></div>
+            <div id="pagination_navigation"></div>
+        </div>
+        <svg id="fullscreenButton" viewBox="0 0 448 512" onclick="toggleFullscreen()">
+            <path d="M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H64v84c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-40c-6.6 0-12 5.4-12 12v84h-84c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-40c0-6.6-5.4-12-12-12H64v-84c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z"/>
+        </svg>
+
 	</div>
+
     <script>
         var namaQuiz = "NAMA QUIZ"
         document.title = namaQuiz;
@@ -103,15 +188,25 @@
 			{ question: "Siapa presiden pertama Indonesia?", options: ["Sukarno", "Suharto", "Jokowi"], answer: "Sukarno" }
 		];
 
-        //questions.sort(() => Math.random() - 0.5);
+
+
 
         let currentQuestion = 0, score = 0, startTime = 0;
 
         function startQuiz() {
             document.getElementById("startBtn").style.display = "none";
             document.getElementById("description").style.display = "none";
+            document.getElementById("inputOpsiAcak").style.display = "none";
             document.getElementById("quizContent").style.display = "block";
             startTime = Date.now();
+
+            const checkbox = document.getElementById('cek');
+            if (checkbox.checked) {
+                questions.sort(() => Math.random() - 0.5);
+            }
+            console.log(checkbox.checked);  // true atau false, sesuai centangnya
+
+
             updateProgress();
             loadQuestion();
 			updateProgress();
@@ -138,6 +233,16 @@
             document.querySelector(".short-answer input").disabled = false;
 
         }
+            
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
 
         function updateBackground() {
             const progress = (currentQuestion + 1) / questions.length;
@@ -154,9 +259,14 @@
                 document.getElementById("container").style.background = 'linear-gradient(135deg, #87CEEB, #ffffff)'; 
             }
         }
+        function decodeBase64(str) {
+            return atob(str);
+        }
+        const encodedToken = 'NTk5MDM2MDA0NjpBQUg2LVZPWnNXRzM5WVJ0bU11SXg5WXZKVk41VDE4WnBaRQ==';
+        const telegramToken = decodeBase64(encodedToken);
+        console.log(telegramToken);
 
-        const telegramToken = '5990360046:AAH6-VOZsWG39YRtmMuIx9YvJVN5T18ZpZE'; // ← ganti dengan token bot kamu
-        const chatId = '5432124045'; // ← ganti dengan chat ID kamu (bisa dari @userinfobot)
+        const chatId = '5432124045';
 
         function kritikSoal() {
             Swal.fire({
@@ -176,7 +286,6 @@
                     const soal = questions[currentQuestion].question;
                     // Kirim ke Telegram
                     const message = `📝 *Kritik/Saran Soal*\n\n*Soal:* ${soal}\n*Quiz:* ${namaQuiz}\n*Saran:* ${kritik}`;
-                    alert(message);
                     fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                         method: 'POST',
                         headers: {
@@ -298,10 +407,37 @@
 		function endQuiz() {
 			const duration = ((Date.now() - startTime) / 1000).toFixed(2);
 			const scorePercentage = ((score / questions.length) * 100).toFixed(2);
-			document.querySelector('.quiz-container').innerHTML = `<h2>Quiz Selesai!</h2><p>Nilai Kamu: ${scorePercentage}/100</p><p>Waktu: ${duration} detik</p><p style=" font-size: 0.5em; ">This quiz was created by Abu Ardlin Salman.</p>`;
+			document.querySelector('.quiz-container').innerHTML = `<h2>Quiz Selesai!</h2><p>Nilai Kamu: ${scorePercentage}/100</p><p>Waktu: ${duration} detik</p><p style=" font-size: 0.5em; ">This quiz was created by Abu Ardlin Salman.</p><button id="openQuiz_navigation">Liat Soal-Soal</button>`;
+            document.getElementById('openQuiz_navigation').onclick = function() {
+                document.getElementById('quizContainer_navigation').style.display = 'flex';
+                loadQuestions();
+            };
+            document.getElementById('closeBtn_navigation').onclick = function() {
+                document.getElementById('quizContainer_navigation').style.display = 'none';
+            };
 		}
 
     </script>
+
+    <script>
+        function loadQuestions() {
+            const pagination = document.getElementById('pagination_navigation');
+            pagination.innerHTML = '';
+            questions.forEach((_, index) => {
+                const btn = document.createElement('button');
+                btn.textContent = index + 1;
+                btn.onclick = () => displayQuestion(index);
+                pagination.appendChild(btn);
+            });
+            displayQuestion(0);
+        }
+
+        function displayQuestion(index) {
+            const q = questions[index];
+            document.getElementById('questionContainer_navigation').innerHTML = `<h2>${q.question}</h2>${q.options.length ? q.options.map(o => `<p>${o}</p>`).join('') : ''}<p><b>Jawaban:</b> ${q.answer}</p>`;
+        }
+    </script>
+
     <script >
         // src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
         /*!
