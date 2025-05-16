@@ -27,32 +27,26 @@
 1. Siapkan file teks materi (string teks).
 
 2. Gunakan ChatGPT dengan prompt berikut untuk membuat soal pilihan ganda berbahasa Arab:
-
-Aku ingin kamu di chat ini membuatkan soal pilihan ganda dari text yang akan aku berikan
-
-Aku ingin jenis soalnya adalah ma‘lumatiyyah
-
-Contoh:  
 ```
+Aku ingin kamu di chat ini membuatkan soal pilihan ganda dari text yang akan aku berikan
+Aku ingin jenis soalnya adalah ma‘lumatiyyah
+Contoh:  
+
 ➡️Buah yang kaya akan vitamin C adalah...?
 Pisang
 Semangka
 Jeruk ✅
 Apel
-```
 
 Jangan menggunakan simbol selain yang disebutkan.
-
 Gunakan Bahasa Arab.
+```
 
 3. Jika ingin menambahkan soal jawaban singkat sekaligus soal pilihan ganda, gunakan prompt ini:
-
-Aku ingin kamu di chat ini membuatkan soal pilihan ganda dan soal jawaban singkat dari text yang akan aku berikan
-
-Aku ingin jenis soalnya adalah ma‘lumatiyyah
-
-Contoh:  
 ```
+Aku ingin kamu di chat ini membuatkan soal pilihan ganda dan soal jawaban singkat dari text yang akan aku berikan
+Aku ingin jenis soalnya adalah ma‘lumatiyyah
+Contoh:  
 ➡️Warna domba adalah?  
 Putih ✅  
 ➡️Buah yang kaya akan vitamin C adalah...?
@@ -60,12 +54,10 @@ Pisang
 Semangka
 Jeruk ✅
 Apel
-```
 
 Jangan menggunakan simbol selain yang disebutkan.
-
 Gunakan Bahasa Arab.
-
+```
 4. Modifikasi prompt sesuai kebutuhan untuk hasil soal yang diinginkan.
 
 5. Copy-paste materi teks maksimal sekitar **61 baris** ke ChatGPT untuk membuat soal.
