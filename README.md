@@ -33,12 +33,13 @@ Aku ingin kamu di chat ini membuatkan soal pilihan ganda dari text yang akan aku
 Aku ingin jenis soalnya adalah ma‘lumatiyyah
 
 Contoh:  
+```
 ➡️Buah yang kaya akan vitamin C adalah...?
 Pisang
 Semangka
 Jeruk ✅
 Apel
-
+```
 
 Jangan menggunakan simbol selain yang disebutkan.
 
@@ -51,6 +52,7 @@ Aku ingin kamu di chat ini membuatkan soal pilihan ganda dan soal jawaban singka
 Aku ingin jenis soalnya adalah ma‘lumatiyyah
 
 Contoh:  
+```
 ➡️Warna domba adalah?  
 Putih ✅  
 ➡️Buah yang kaya akan vitamin C adalah...?
@@ -58,7 +60,7 @@ Pisang
 Semangka
 Jeruk ✅
 Apel
-
+```
 
 Jangan menggunakan simbol selain yang disebutkan.
 
