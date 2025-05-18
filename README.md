@@ -14,8 +14,8 @@
    - Gunakan halaman **"Encode & Decode Base64.html"** untuk membuat `encodedToken` dari bot token Telegram-mu.  
    - Pastikan user chatID sudah memulai bot dengan perintah `start`.
 
-4. **Ubah Variabel `namaQuiz`**  
-   Untuk mengganti judul quiz dan mengatur pesan kritik (feedback).
+4. **Ubah Nama File**  
+   Nama title dari quiz sesuai nama file.
 
 5. **Ubah Variabel `questions`**  
    Untuk mengganti soal-soal quiz.
